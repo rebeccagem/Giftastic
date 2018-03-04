@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var cuteThings = ["ducklings", "kittens", "puppies", "piglets"];
+    var cuteThings = ["dragonfly", "kittens", "puppies", "piglets"];
 
 
     // var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=LCfpjoSmQfkLZR5namsFIB3hqM7uFLLh&limit=5");
@@ -13,7 +13,7 @@ $(document).ready(function () {
         var cuteName = $(this).data('name');
 
         // Here we construct our URL
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + cuteName + "&api_key=LCfpjoSmQfkLZR5namsFIB3hqM7uFLLh&limit=20";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + cuteName + "&api_key=LCfpjoSmQfkLZR5namsFIB3hqM7uFLLh&limit=3&rating=g";
 
         $.ajax({
             url: queryURL,
@@ -21,20 +21,32 @@ $(document).ready(function () {
         })
 
             .then(function (response) {
-
+                console.log(response);
                 //this stores a part of the returned api object in a variable
-                var imageUrl = response.data.image_original_url;
+                for (i = 0; i < 3; i++) {
+                    var imageUrl = response.data[i].images.fixed_height_still.url;
+                    var imageURLGif = response.data[i].images.fixed_height.url;
 
-                //this creates an image tag to hold the generated gif
-                var cuteImage = $("<img>");
+                    //creates div to hold image and its buttons
+                    var imgCard = $("<div>").addClass("imgCard");
 
-                //this puts the image url from the api into the image tag src
-                cuteImage.attr("src", imageUrl);
-                cuteImage.attr("alt", cuteName);
+                    //this creates an image tag to hold the generated gif
+                    var cuteImage = $("<img>").addClass("imageClass");
 
-                //this makes each image created load above the older images
-                $("#images").prepend(cuteImage);
+                    //this puts the image url from the api into the image tag src
+                    cuteImage.attr("src", imageUrl);
+                    cuteImage.attr("alt", cuteName);
+                    //this makes each image created load above the older images
 
+                    var saveBtn = $("<button>").addClass("saveBtns");
+
+                    saveBtn.text("Download");
+                    imgCard.append(cuteImage, saveBtn);
+                    // $(cuteImage).appendTo(".imgCard");
+                    // $(saveBtn).appendTo(".imgCard");
+                    $("#images").prepend(imgCard);
+
+                }
             });
     }
 
@@ -62,6 +74,24 @@ $(document).ready(function () {
     //listen to document for click event
     $(document).on("click", ".cuteBtn", displayGifs);
 
+
+    $(document).on("click", ".imageClass", hello);
+
+
+    function hello() {
+        console.log("HI");
+        console.log(this);
+
+        if (this.src.indexOf("_s") != -1) {
+            $(this).attr('src', $(this).attr('src').replace('_s', ''));
+        }
+        //listens for the user to click on an image and then plays the image
+        else {
+            $(this).attr('src', $(this).attr('src').replace('.gif', '_s.gif'));
+        }
+
+
+    }
     //creates initial set of buttons
     makeBtn();
 
