@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
-    var cuteThings = ["dragonfly", "kittens", "puppies", "piglets"];
+    var cuteThings = ["nothingisfunny", "oliversin", "eloylannoo", "100soft", "batburl", "JamesGuthman", "xponentialdesign", "caromartini", "blakekathryn", "russelletchen", "asugarhigh", "patakk", "AnchorPoint", "parthkothekar", "anamouyis", "oliviawhen", "guillellano", "alvaroabrante", "sophia-antidz", "bigbadbarth", "shuttertoast", "hoppip", "Parallel_studio_", "brinkofsound", "lazymom", "ioanahara", "samcannon", "andrewbenson", "29thfloor", "nikitaliskov", "pernillekjaer", "sakkesoini", "philipparice"];
+
+    var cuteName;
 
 
     // var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=LCfpjoSmQfkLZR5namsFIB3hqM7uFLLh&limit=5");
@@ -10,10 +12,11 @@ $(document).ready(function () {
         // $("#gifContainer").empty();
 
         // Here we grab the text from the input box
-        var cuteName = $(this).data('name');
+        cuteName = $(this).data('name');
 
         // Here we construct our URL
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + cuteName + "&api_key=LCfpjoSmQfkLZR5namsFIB3hqM7uFLLh&limit=10&rating=g";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?username=" + cuteName + "&api_key=LCfpjoSmQfkLZR5namsFIB3hqM7uFLLh&limit=10&rating=g";
+
 
         $.ajax({
             url: queryURL,
@@ -41,7 +44,7 @@ $(document).ready(function () {
                     var saveBtn = $("<a>").addClass("saveBtns btn");
 
                     saveBtn.text("Download");
-                    saveBtn.attr("href", response.data[i].images.original.url);
+                    saveBtn.attr("href", response.data[i].images.original.url).attr("target", "_blank");
                     console.log(response.data[i].images.original.url);
                     imgCard.append(cuteImage, saveBtn);
                     // $(cuteImage).appendTo(".imgCard");
@@ -57,6 +60,11 @@ $(document).ready(function () {
         for (i = 0; i < cuteThings.length; i++) {
             ///this adds the buttons with classes and data names
             var a = $("<button>").addClass("cuteBtn").attr("data-name", cuteThings[i]).text(cuteThings[i]);
+
+            var connect = $("<a>").attr("href", "https://giphy.com/" + cuteThings[i]).attr("target", "_blank").append("<i class='fas fa-external-link-alt'>");
+
+            a.append(connect);
+
             $("#btnContainer").append(a);
         }
     }
@@ -74,9 +82,9 @@ $(document).ready(function () {
     });
 
 
-    $(".saveBtn").click(function(){
-     var href = $('.saveBtn').attr('href');
-     window.location.href = href;
+    $(".saveBtns").click(function () {
+        var href = $(".saveBtns").attr("href");
+        window.location.href = href;
     });
 
     //listen to document for click event

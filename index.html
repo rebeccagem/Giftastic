@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Trivia Game</title>
+    <title>GIFCRITIC</title>
 
     <!-- Added a link to Bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -15,17 +15,13 @@
 <body>
 
     <div class="container">
-        <div class="row">
-            <div class="col-12">
+        <div class="row" id="header">
+            <div class="col-md-6">
                 <nav>
-                    <h1>Giftastic</h1>
+                    <h1>GIFCRITIC</h1>
                 </nav>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-8" id="btnContainer">
-            </div>
-            <div class="col-4">
+            <div class="col-md-6">
                 <form>
                     <div class="input-group mb-3">
                         <input id="userInput" type="text" class="form-control" placeholder="whatcha wanna see?" aria-label="whatcha wanna see?" aria-describedby="basic-addon2">
@@ -37,10 +33,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12" id="images">
+            <div class="col-sm-2 vnav flex-column">
+            <p>Cool People Who</br> Make Cool Shit:</p>
+            <div  id="btnContainer">
+                
+            </div></div>
+            <div class="col-sm-10" id="images">
             </div>
-            <!-- <div class="col-12" id="gifContainer">
-            </div> -->
         </div>
     </div>
     <!-- Added link to the jQuery Library -->
