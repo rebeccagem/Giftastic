@@ -13,7 +13,7 @@ $(document).ready(function () {
         var cuteName = $(this).data('name');
 
         // Here we construct our URL
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + cuteName + "&api_key=LCfpjoSmQfkLZR5namsFIB3hqM7uFLLh&limit=3&rating=g";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + cuteName + "&api_key=LCfpjoSmQfkLZR5namsFIB3hqM7uFLLh&limit=10&rating=g";
 
         $.ajax({
             url: queryURL,
@@ -23,7 +23,7 @@ $(document).ready(function () {
             .then(function (response) {
                 console.log(response);
                 //this stores a part of the returned api object in a variable
-                for (i = 0; i < 3; i++) {
+                for (i = 0; i < 10; i++) {
                     var imageUrl = response.data[i].images.fixed_height_still.url;
                     var imageURLGif = response.data[i].images.fixed_height.url;
 
@@ -38,9 +38,11 @@ $(document).ready(function () {
                     cuteImage.attr("alt", cuteName);
                     //this makes each image created load above the older images
 
-                    var saveBtn = $("<button>").addClass("saveBtns");
+                    var saveBtn = $("<a>").addClass("saveBtns btn");
 
                     saveBtn.text("Download");
+                    saveBtn.attr("href", response.data[i].images.original.url);
+                    console.log(response.data[i].images.original.url);
                     imgCard.append(cuteImage, saveBtn);
                     // $(cuteImage).appendTo(".imgCard");
                     // $(saveBtn).appendTo(".imgCard");
@@ -60,7 +62,7 @@ $(document).ready(function () {
     }
 
     //when user clicks submit
-    $("#submitBtn").on("click", function () {
+    $("#submitBtn").on("click", function (event) {
         //prevents page from refreshing
         event.preventDefault();
         //takes value of user submission and assigns it to variable userInput
@@ -69,6 +71,12 @@ $(document).ready(function () {
 
         //runs with new buttons added
         makeBtn();
+    });
+
+
+    $(".saveBtn").click(function(){
+     var href = $('.saveBtn').attr('href');
+     window.location.href = href;
     });
 
     //listen to document for click event

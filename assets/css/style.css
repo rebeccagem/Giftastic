@@ -1,14 +1,13 @@
 .imgCard {
-    border: 3px solid rgb(61, 19, 51);
     display: flex;
     flex-direction: column;
-    margin: 10px 0px;
+    margin: 10px;
 
 }
 
 #images {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
