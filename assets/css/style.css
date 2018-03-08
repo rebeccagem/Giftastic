@@ -27,9 +27,19 @@ p{
     margin:0;
     padding:5px;
     font-style: italic;
+    font-size:12px;
 }
 
 .fa-external-link-alt {
     color: rgb(148, 148, 148);
     padding-left:5px;
+}
+
+a.saveBtns.btn {
+    color:rgb(0, 0, 0);
+    background-color: rgb(214, 242, 247);
+    height: 30px;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    margin-top: 5px;
 }
